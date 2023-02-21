@@ -1,74 +1,92 @@
-const fs = require("fs");
-const path = require('path');
-const inquirer = require("inquirer");
+
 const generateMarkdown = require("./utils/generateMarkdown");
+
+// External packages
+const inquirer = require('inquirer');
+const fs = require('fs');
+const util = require('util');
 
 // array of questions for user
 const questions = [
-
-
+    {
+        type: 'input',
+        message: "What is your project title?",
+        name: 'title',
+        validate: function (answer) {
+            if (answer.length < 1) {
+                return console.log("A valid project title is required.");
+            }
+            return true;
+        }
+    },
+    {
+        type: 'input',
+        message: "Write a description of your project.",
+        name: 'description',
+        validate: function (answer) {
+            if (answer.length < 1) {
+                return console.log("A valid project description is required.");
+            }
+            return true;
+        }
+    },
+    
+    {
+      type: 'input',
+      message: "What is your Github username?",
+      name: 'github'
+  },
+    {
+        type: 'input',
+        message: "Describe the steps required to install your project for the Installation section.",
+        name: 'installation'
+    },
+    {
+        type: 'input',
+        message: "Provide instructions and examples of your project in use for the Usage section.",
+        name: 'usage'
+    },
+    {
+        type: 'input',
+        message: "Provide guidelines on how other developers can contribute to your project.",
+        name: 'contributions'
+    },
+    {
+        type: 'input',
+        message: "Provide any tests written for your application and provide examples on how to run them.",
+        name: 'tests'
+    },
+    {
+        type: 'list',
+        message: "Choose a license for your project.",
+        choices: ['GNU AGPLv3', 'Mozilla Public License 2.0', 'Apache License 2.0', 'MIT License', 'No license'],
+        name: 'license'
+    }
 ];
 
 
-inquirer.prompt([
-  {
-    type: 'input',
-    name: 'Description',
-    message: 'What is your name?',
-  },
-  {
-    type: 'input',
-    name: 'Installation',
-    message: 'How can your application be installed',
-  },
-  {
-    type: 'input',
-    name: 'usage',
-    message: 'What is the usage of your application',
-  },
-  {
-    type: 'input',
-    name: 'Licsence',
-    message: 'Do you have a licsence for your application?',
-  },
-  {
-    type: 'input',
-    name: 'contribution',
-    message: 'What extneral contributions were made to your application?',
-  },
-  {
-    type: 'input',
-    name: 'contribution',
-    message: 'What extneral contributions were made to your application?',
-  },
-])
 
+
+
+
+// function call to initialize program
+init = () => {
+  inquirer.prompt(questions)
+.then((answers) => {
+  const readmeDoc = generateMarkdown(answers)
 
 
 // function to write README file
-function writeToFile(fileName, data) {
+fs.writeFile('readme.md', readmeDoc, (err) => {
+  if (err) throw err;
+  console.log('Done');
+});
+})
+.catch((error) => {
+console.log(error);
+});
+
+
 }
 
-
-
-// function to initialize program
-function init() {
-
-}
-
-// function call to initialize program
 init();
-
-
-// copied code
-
-// // importing the fs file system node module
-// const fs = require('fs');
-
-// // log.txt name of the file being processed
-// // process argv adds to the file
-// // (err) 
-// fs.appendFile('readme.md', `${process.argv[2]}\n`, (err) =>
-//   // if error logs error, if not error logs message
-//   err ? console.error(err) : console.log('Commit logged!')
-// );
