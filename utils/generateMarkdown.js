@@ -31,7 +31,7 @@ function generateMarkdown(data) {
   ## Tests
   ${data.tests}
 
-
+## Github
   <a href="https://github.com/${data.github}">${data.github}</a>
 
 `;
