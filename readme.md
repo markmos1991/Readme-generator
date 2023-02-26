@@ -1,6 +1,6 @@
 # Readme Generator
   
-  undefined
+  This readme was generatred using the command line. Command line readme generator.
 
   ### Table of Contents
 * [Description](#description)
@@ -20,6 +20,11 @@
 
   ## Usage
   The application then takes your responses and uses axios to fetch your GitHub profile from the GitHub API, including your GitHub profile picture (avatar) and email. From there, the application will generate markdown and a table of contents for the README conditionally based on your responses to the Inquirer prompts (so, if you don't answer the optional questions, such as Installation, an Installation section will not be included in your README). The README will also include badges for your GitHub repo.
+  
+
+https://user-images.githubusercontent.com/101826190/221408367-40db5198-0dc5-4367-bf94-87545d689a55.mov
+
+  
 
   ## Contributions
   
